@@ -23,6 +23,37 @@ app.get('/productos', async (req, res) => {
     res.status(200).json(productos);
 });
 
+// Registrar un nuevo producto
+app.post('/productos', async (req, res) => {
+    const productos = await redJson('data/productos.json');
+
+    const nuevoProducto = {
+        id: productos.length > 0
+            ? Math.max(...productos.map(item => item.id)) + 1
+            : 1,
+        nombre: req.body.nombre,
+        precio: req.body.precio,
+        fabricante: req.body.fabricante
+    };
+
+    productos.push(nuevoProducto);
+
+    await writeJson('data/productos.json', productos);
+
+    res.status(201).json({
+        status: 201,
+        message: 'Producto registrado correctamente',
+        producto: nuevoProducto
+    });
+});
+
+// Obtener todos los fabricantes
+app.get('/fabricantes', async (req, res) => {
+    const fabricantes = await redJson('data/fabricantes.json');
+
+    res.status(200).json(fabricantes);
+});
+
 const PORT = 3000;
 
 app.listen(PORT, () => {
