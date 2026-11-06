@@ -54,10 +54,6 @@ app.get('/fabricantes', async (req, res) => {
     res.status(200).json(fabricantes);
 });
 
-const PORT = 3000;
-
-
-
 //Borrar
 app.delete('/productos/:id', async (req, res) => {
     const productos = await redJson('data/productos.json');
