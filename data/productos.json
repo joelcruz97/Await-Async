@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laptop Lenovo",
+    "precio": 15000,
+    "fabricante": "Lenovo"
+  },
+  {
+    "id": 3,
+    "nombre": "Teclado Redragon",
+    "precio": 850,
+    "fabricante": "Redragon"
+  }
+]
