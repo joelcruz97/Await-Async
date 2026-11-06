@@ -10,5 +10,11 @@
     "nombre": "Teclado Redragon",
     "precio": 850,
     "fabricante": "Redragon"
+  },
+  {
+    "id": 4,
+    "nombre": "Monitor Samsung",
+    "precio": 6500,
+    "fabricante": "Samsung"
   }
 ]
