@@ -56,11 +56,9 @@ app.get('/fabricantes', async (req, res) => {
 
 const PORT = 3000;
 
-app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-});
 
-// Eliminar un producto por ID
+
+//Borrar
 app.delete('/productos/:id', async (req, res) => {
     const productos = await redJson('data/productos.json');
 
@@ -81,4 +79,46 @@ app.delete('/productos/:id', async (req, res) => {
         status: 200,
         message: 'Registro eliminado'
     });
+});
+
+// actualizar
+app.put('/productos/:id', async (req, res) => {
+  const productos = await redJson('data/productos.json');
+
+  const indice = productos.findIndex(
+    producto => String(producto.id) === req.params.id
+  );
+
+  if (indice === -1) {
+    return res.status(404).json({
+      status: 404,
+      message: 'Registro no encontrado'
+    });
+  }
+
+  productos[indice] = {
+    ...productos[indice],
+    ...req.body,
+    id: productos[indice].id
+  };
+
+  await writeJson('data/productos.json', productos);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Registro actualizado',
+    data: productos[indice]
+  });
+});
+
+
+
+
+
+
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });
